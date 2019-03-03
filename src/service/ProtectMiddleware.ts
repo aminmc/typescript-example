@@ -1,11 +1,11 @@
 import * as express from 'express';
 import {inject} from 'inversify';
+import {provide} from 'inversify-binding-decorators';
 import {BaseMiddleware} from 'inversify-express-utils';
 import TYPE from '../constant/TYPE';
-import provideSingleton from '../ioc/provideSingleton';
 import {KeycloakService} from './KeycloakService';
 
-@provideSingleton(TYPE.ProtectMiddleware)
+@provide(TYPE.ProtectMiddleware)
 export class ProtectMiddleware extends BaseMiddleware {
 
     private readonly keycloakProtect: any;
