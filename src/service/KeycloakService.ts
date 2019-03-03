@@ -1,10 +1,10 @@
 import {BaseMemoryStore} from 'express-session';
-import {provide} from 'inversify-binding-decorators';
 import Keycloak from 'keycloak-connect';
 import TYPE from '../constant/TYPE';
+import provideSingleton from '../ioc/provideSingleton';
 import session = require('express-session');
 
-@provide(TYPE.KeycloakService)
+@provideSingleton(TYPE.KeycloakService)
 export class KeycloakService {
 
     private readonly keycloak: Keycloak;

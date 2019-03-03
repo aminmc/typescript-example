@@ -1,7 +1,7 @@
-import {provide} from 'inversify-binding-decorators';
 import TYPE from '../constant/TYPE';
+import provideSingleton from '../ioc/provideSingleton';
 
-@provide(TYPE.HomeService)
+@provideSingleton(TYPE.HomeService)
 export class HomeService {
 
     public async sayHello(): Promise<object> {
