@@ -20,7 +20,7 @@ export class KeycloakService {
             'ssl-required': 'external',
         };
         this.sessionStore = new session.MemoryStore();
-        this.keycloak = new Keycloak({store: this.sessionStore}, kcConfig);
+        this.keycloak = new Keycloak({}, kcConfig);
     }
 
     public middleware(): any {
@@ -31,7 +31,4 @@ export class KeycloakService {
         return this.keycloak.protect();
     }
 
-    public store(): any {
-        return this.sessionStore;
-    }
 }
