@@ -1,26 +1,16 @@
-import {BaseMemoryStore} from 'express-session';
+import {inject} from 'inversify';
 import {provide} from 'inversify-binding-decorators';
 import Keycloak from 'keycloak-connect';
 import TYPE from '../constant/TYPE';
-import session = require('express-session');
+import {Config} from '../utilities/Config';
 
 @provide(TYPE.KeycloakService)
 export class KeycloakService {
 
     private readonly keycloak: Keycloak;
-    private readonly sessionStore: BaseMemoryStore;
 
-    constructor() {
-        const kcConfig = {
-            'auth-server-url': 'http://localhost:8080/auth',
-            'bearer-only': true,
-            'confidential-port': 0,
-            'realm': 'master',
-            'resource': 'typescript-node-app',
-            'ssl-required': 'external',
-        };
-        this.sessionStore = new session.MemoryStore();
-        this.keycloak = new Keycloak({}, kcConfig);
+    constructor(@inject(TYPE.Config) private readonly config: Config) {
+        this.keycloak = new Keycloak({}, config.authConfig());
     }
 
     public middleware(): any {
