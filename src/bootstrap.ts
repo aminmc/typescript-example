@@ -1,15 +1,17 @@
-import 'reflect-metadata';
 import * as bodyParser from 'body-parser';
 import {InversifyExpressServer} from 'inversify-express-utils';
+import 'reflect-metadata';
 
 import TYPE from './constant/TYPE';
-import container from './ioc/inversify.config';
+import {ApplicationContext} from './ioc/ApplicationContext';
 import {KeycloakService} from './service/KeycloakService';
 
-const server = new InversifyExpressServer(container);
+const appContainer: ApplicationContext = new ApplicationContext();
+
+const server = new InversifyExpressServer(appContainer.appContainer());
 
 server.setConfig((app) => {
-    const keycloakService: KeycloakService = container.get(TYPE.KeycloakService);
+    const keycloakService: KeycloakService = appContainer.appContainer().get(TYPE.KeycloakService);
     app.use(keycloakService.middleware());
     app.use(bodyParser.urlencoded({
         extended: true,
