@@ -13,11 +13,11 @@ export class ApplicationContext {
         this.container = new Container({
             defaultScope: 'Singleton'
         });
-        // this.container.bind<KeycloakService>(TYPE.KeycloakService).to(KeycloakService);
-        // this.container.bind<HomeService>(TYPE.HomeService).to(HomeService);
-        // this.container.bind<ProtectMiddleware>(TYPE.ProtectMiddleware).to(ProtectMiddleware);
-        // this.container.bind<Config>(TYPE.Config).to(Config);
-        this.container.load(buildProviderModule());
+        this.container.bind<KeycloakService>(TYPE.KeycloakService).to(KeycloakService);
+        this.container.bind<HomeService>(TYPE.HomeService).to(HomeService);
+        this.container.bind<ProtectMiddleware>(TYPE.ProtectMiddleware).to(ProtectMiddleware);
+        this.container.bind<Config>(TYPE.Config).to(Config);
+         // this.container.load(buildProviderModule());
     }
 
     public iocContainer(): Container {
