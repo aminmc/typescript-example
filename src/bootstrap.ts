@@ -1,10 +1,10 @@
+import 'reflect-metadata';
 import * as bodyParser from 'body-parser';
 import {InversifyExpressServer} from 'inversify-express-utils';
-import 'reflect-metadata';
-
 import TYPE from './constant/TYPE';
 import {ApplicationContext} from './ioc/ApplicationContext';
 import {KeycloakService} from './service/KeycloakService';
+import './controller/HomeController';
 
 const applicationContext: ApplicationContext = new ApplicationContext();
 
