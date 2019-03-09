@@ -11,7 +11,7 @@ export class ApplicationContext {
         this.container.load(buildProviderModule());
     }
 
-    public appContainer(): Container {
+    public iocContainer(): Container {
         return this.container;
     }
 }

@@ -6,12 +6,14 @@ import TYPE from './constant/TYPE';
 import {ApplicationContext} from './ioc/ApplicationContext';
 import {KeycloakService} from './service/KeycloakService';
 
-const appContainer: ApplicationContext = new ApplicationContext();
+const applicationContext: ApplicationContext = new ApplicationContext();
 
-const server = new InversifyExpressServer(appContainer.appContainer());
+const container = applicationContext.iocContainer();
+
+const server = new InversifyExpressServer(container);
 
 server.setConfig((app) => {
-    const keycloakService: KeycloakService = appContainer.appContainer().get(TYPE.KeycloakService);
+    const keycloakService: KeycloakService = container.get(TYPE.KeycloakService);
     app.use(keycloakService.middleware());
     app.use(bodyParser.urlencoded({
         extended: true,
